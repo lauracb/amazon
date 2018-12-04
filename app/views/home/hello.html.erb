@@ -1,0 +1,11 @@
+Hola <%= @name %>
+
+<%#Esto se llama helpers%>
+<a href="<%= cualquier_cosa_path%>">Ir al home 1</a>
+<%= link_to "Ir al home 2", cualquier_cosa_path%> <%#Esta es la más utilizada%>
+
+<%#Si quiero redirigirlo fuera de la página, o a la dirección absoluta. Casi siempre se trabaja como path%>
+<%= link_to "Ir al home 3", cualquier_cosa_url%>
+
+<%#Si quiero redirigirlo al root%>
+<%= link_to "Ir al home 4", root_path%>

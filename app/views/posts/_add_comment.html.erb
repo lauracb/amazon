@@ -1,0 +1,12 @@
+<h2>Add Comment</h2>
+
+<%= form_for([@post, @post.comments.build]) do |f| %>
+    <div class="form-group">
+        <label for="">Comment</label>
+            <%= f.text_area :comment, class: "form-control" %>
+    
+        <p>
+            <%= f.submit "Save Comment", class:"btn btn-primary" %>
+        </p>
+    </div>
+<% end %>

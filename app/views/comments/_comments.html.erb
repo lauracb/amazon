@@ -1,0 +1,11 @@
+ <strong><%#= comment.user.email %></strong>
+ <%#= comment.comment %>
+
+ <% @post.comments.each do |comment|%>
+    <ul>
+    <li><strong>Commenter: </strong>
+    <%= comment.user.email %>
+    <strong>Comment: </strong>
+    <%= comment.comment %></li>
+    </ul>
+<% end %>
