@@ -39,11 +39,32 @@ class PostsController < ApplicationController
       id = @post.id
       
       users = User.where(role: "user")
+      subscriptors = Subscriptor.all
 
       users.each do |user|
-        user_email = user.email
-        UserNotifierMailer.new_post_notifying_user(user_email, title, id).deliver_now
+        email = user.email
+        type_user = "User"
+        UserNotifierMailer.new_post_notifying(email, title, id, type_user).deliver_now
       end
+
+      subscriptors.each do |subscriptor|
+        email = subscriptor.email
+        type_user = "Subscriptor"
+        UserNotifierMailer.new_post_notifying(email, title, id, type_user).deliver_now
+      end
+
+      ## con el código de 
+      #   UserNotifierMailer.new_post_notifying_user(user_email, title, id).deliver_nowarriba se refactorizó el siguiente: también se modificó en user_notifier_mailer.rb y se agregó la view con el método new_post_notifying.html.erb
+      # users.each do |user|
+      #   user_email = us
+      #   UserNotifierMailer.new_post_notifying_user(user_email, title, id).deliver_nower.email
+      #   UserNotifierMailer.new_post_notifying_user(user_email, title, id).deliver_now
+      # end
+
+      # subscriptors.each do |subscriptor|
+      #   subscriptor_email = subscriptor.email
+      #   UserNotifierMailer.new_post_notifying_subscriptor(subscriptor_email, title, id).deliver_now
+      # end
 
       redirect_to posts_path, notice: "Post created successfully"
     else
@@ -68,6 +89,26 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
 
     if @post.update(post_params)
+      ## enviar un correo nuevo a los users y subscriptors cuando se edita un nuevo post
+      title = @post.title
+      id = @post.id   
+      users = User.where(role: "user")
+      subscriptors = Subscriptor.all
+
+      users.each do |user|
+        email = user.email
+        type_user = "User"
+        UserNotifierMailer.update_post_notifying(email, title, id, type_user).deliver_now
+      end
+
+      subscriptors.each do |subscriptor|
+        email = subscriptor.email
+        type_user = "Subscriptor"
+        UserNotifierMailer.update_post_notifying(email, title, id, type_user).deliver_now
+      end
+
+
+
       redirect_to posts_path, notice: "Post updated successfully"
     else
       render :edit, alert: "Post failed to be edited. Try again"
