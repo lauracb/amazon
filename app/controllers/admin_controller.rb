@@ -8,6 +8,4 @@ class AdminController < ApplicationController
     #render layout: "admin" #si quiero que el layout sólo aplique en esta vista.
   end
 
-  def show
-  end
 end

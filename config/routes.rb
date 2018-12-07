@@ -8,6 +8,11 @@ Rails.application.routes.draw do
 
   resources :subscriptors, only: [:new, :create]
 
+  ## Admin Routes
+  get 'admin', to: 'admin#index'
+  # get 'admin/index'
+  # get 'admin/show'
+
   # #   get 'posts/index', to: 'posts#index'
   # #   get 'posts/create', to: 'posts#create'
   # # # En total 8 rutas. que con resources se crean automáticamente
@@ -27,9 +32,7 @@ Rails.application.routes.draw do
   # get 'blog/show'
   # get 'blog/edit'
   
-  #  # Admin Routes
-  # get 'admin/index'
-  # get 'admin/show'
+ 
 
   # Devise
   devise_for :users # se verifican las rutas con rails routes
