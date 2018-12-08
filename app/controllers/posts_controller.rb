@@ -121,6 +121,7 @@ class PostsController < ApplicationController
     post.destroy
     ## Otra forma de escribir el flash notice y el flash alert
     #flash[:notice] = "El post fue eliminado exitosamente"
+
     redirect_to posts_path, notice: "Post deleted successfully"
   end
 
