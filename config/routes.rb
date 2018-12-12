@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-   # Index, Root or Home
+  # Index, Root or Home
   root 'home#index'
 
   resources :posts do
@@ -10,8 +10,12 @@ Rails.application.routes.draw do
 
   ## Admin Routes
   get 'admin', to: 'admin#index'
+  get 'admin/products', to: 'admin#products'
   # get 'admin/index'
   # get 'admin/show'
+
+  ##Products routes
+  resources :products, only: [:new, :create] #a estas rutas tendrá acceso el user
 
   # #   get 'posts/index', to: 'posts#index'
   # #   get 'posts/create', to: 'posts#create'
