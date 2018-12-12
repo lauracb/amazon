@@ -25,7 +25,7 @@ gem 'jbuilder', '~> 2.5'
 
 # Gemas
 gem 'bootstrap', '~> 4.1.3'
-gem 'jquery-rails'
+#gem 'jquery-rails' #La eliminamos ya que la idea es trabajarla via Yarn
 gem 'devise'
 gem 'will_paginate', '~> 3.1.0'
 gem 'will_paginate-bootstrap4'
