@@ -17,7 +17,7 @@
           <p>
             <% if user_signed_in? && current_user.admin? %>
               <%= link_to "Editar", edit_post_path(@post), class: "btn btn-primary" %>
-              <%= link_to "Eliminar", post_path(@post), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
+              <%= link_to "Eliminar", post_path(@post), method: :delete, data: {confirm: "Are you sure?", disable_with: "<i class='fa fa-spinner fa-spin'></i>Removing..."}, class: "btn btn-danger" %>
             <% end %>
           </p>
           <p>
