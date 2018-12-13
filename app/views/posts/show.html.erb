@@ -13,11 +13,15 @@
       <hr>
         <div class="blog-post">
           <h2 class="blog-post-title"><%= @post.title %></h2>
-          <p class="blog-post-meta"><%= time_ago_in_words(@post.created_at) %> ago by <a href="#"><%= @post.user.email %></a> Category: <%= @post.category.name%></p>
+          <p class="blog-post-meta"><%= time_ago_in_words(@post.created_at) %> ago by <a href="#"><%= @post.user.email %></a> 
+          Category: <%= @post.category.name %>
+          Published At: <span id="published-at"><%= @post.published_at %></span>
+          </p>
           <p>
             <% if user_signed_in? && current_user.admin? %>
+              <%= link_to "Publish", publish_post_path(@post), method: :patch, remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin'></i>&nbsp;&nbsp;Publishing..."}, class: "btn btn-warning"%>
               <%= link_to "Editar", edit_post_path(@post), class: "btn btn-primary" %>
-              <%= link_to "Eliminar", post_path(@post), method: :delete, data: {confirm: "Are you sure?", disable_with: "<i class='fa fa-spinner fa-spin'></i>Removing..."}, class: "btn btn-danger" %>
+              <%= link_to "Eliminar", post_path(@post), method: :delete, data: {confirm: "Are you sure?", disable_with: "<i class='fa fa-spinner fa-spin'></i>&nbsp;&nbsp;Removing..."}, class: "btn btn-danger" %>
             <% end %>
           </p>
           <p>

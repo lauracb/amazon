@@ -125,9 +125,15 @@ class PostsController < ApplicationController
     redirect_to posts_path, notice: "Post deleted successfully"
   end
 
+  def publish
+    sleep 2 # método de ruby que va a dormir la petición por 2 segundos
+    @post = Post.find(params[:id])
+    @post.update(published_at: Time.zone.now)
+  end
+
   private
     def post_params
-      params.require(:post).permit(:user_id, :title, :content, :category_id)
+      params.require(:post).permit(:user_id, :title, :content, :category_id, :published_at)
     end
 
     # def validate_user

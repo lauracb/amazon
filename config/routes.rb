@@ -4,6 +4,10 @@ Rails.application.routes.draw do
 
   resources :posts do
     resources :comments
+    # va a crear adicionalmente una ruta para publish con el método patch o put (sirven para actualizar) --> ruta personalizada
+    member do
+      patch :publish
+    end
   end
 
   resources :subscriptors, only: [:new, :create]
