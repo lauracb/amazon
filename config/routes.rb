@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :subscriptors, only: [:new, :create]
+  resources :subscriptors, only: [:new, :create, :index, :show]
 
   ## Admin Routes
   get 'admin', to: 'admin#index'

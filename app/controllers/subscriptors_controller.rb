@@ -2,6 +2,10 @@ class SubscriptorsController < ApplicationController
   
   layout "signin"
   
+  def index
+    
+  end
+
   def new
     @subscriptor = Subscriptor.new  #Crea un objeto nuev
     #byebug herramienda indispensable para debuggear o depurar y hacer que la ejecución pare ahí
@@ -23,6 +27,7 @@ class SubscriptorsController < ApplicationController
     end
 
   end
+  
 
   private
   # Este método se conoce como Strong parameters: método privado donde se hace una lista blanca de campos que con anticipación se le dice a Rails que el usuario debe ingresar y guardar esos datos
