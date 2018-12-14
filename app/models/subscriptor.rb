@@ -11,4 +11,9 @@
 
 class Subscriptor < ApplicationRecord
     validates :name, :email, presence: true
+    
+    def capitalize_name
+        self.name = self.name.capitalize
+    end
 end
+
