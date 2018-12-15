@@ -49,7 +49,13 @@ group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
   gem 'minitest-reporters'
+  gem 'rspec-rails', '~> 3.8'
+  gem 'simplecov' #muestra que % de la aplicación está testeada
+  gem 'factory_bot_rails' # va a trabajar como los fixtures
+  gem 'rails-controller-testing' # más digerible y mejor sintaxis cuando se hace testing sobre los controladores
+  gem 'faker' #crear data falsa para hacer testing con rails
 end
+
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
