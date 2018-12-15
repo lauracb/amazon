@@ -28,6 +28,24 @@ class SubscriptorsController < ApplicationController
 
   end
   
+  def show  
+
+  end
+
+  def edit
+
+  end
+  
+  def update
+    @subscriptor = Subscriptor.find(params[:id])
+    redirect_to subscriptor_path(@subscriptor)
+  end
+
+  def destroy
+    @subscriptor = Subscriptor.find(params[:id])
+    @subscriptor.destroy 
+    redirect_to subscriptors_path
+  end
 
   private
   # Este método se conoce como Strong parameters: método privado donde se hace una lista blanca de campos que con anticipación se le dice a Rails que el usuario debe ingresar y guardar esos datos

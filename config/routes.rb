@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :subscriptors, only: [:new, :create, :index, :show]
+  resources :subscriptors
 
   ## Admin Routes
   get 'admin', to: 'admin#index'
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   # get 'admin/show'
 
   ##Products routes
-  resources :products, only: [:new, :create] #a estas rutas tendrá acceso el user
+  resources :products #a estas rutas tendrá acceso el user
 
   # #   get 'posts/index', to: 'posts#index'
   # #   get 'posts/create', to: 'posts#create'
