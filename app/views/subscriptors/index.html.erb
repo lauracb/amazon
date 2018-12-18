@@ -1,0 +1,21 @@
+<table>
+        <thead>
+        <tr>
+        <th>Email</th>
+        <th>Name</th>
+        <th>Action</th>
+        </tr>
+        </thead>
+<%@subscriptors.each do |subscriptor|%>
+    
+        <tbody>
+        <tr>
+        <td><%= subscriptor.email %></td>
+        <td><%= subscriptor.name %></td>
+        <td><%=link_to "Mostrar", subscriptor_path(subscriptor.id), class: "btn btn-primary"%></td>
+        </tr>
+        </tbody>
+        
+
+<% end%>
+</table>

@@ -1,9 +1,19 @@
 class SubscriptorsController < ApplicationController
   
-  layout "signin"
+  protect_from_forgery with: :null_session
+  #before_action :authenticate_user!
+  before_action :find_subscriptor, only: [:show, :edit, :update, :destroy]
+  layout "signin", only: [:new, :create]
   
   def index
-    
+    @subscriptors= Subscriptor.all.order(created_at: :desc)
+    #render  json: @subscriptors
+
+    respond_to do |format|
+      format.html
+      format.json {render  json: @subscriptors}
+    end
+
   end
 
   def new
@@ -15,36 +25,54 @@ class SubscriptorsController < ApplicationController
   def create
     @subscriptor = Subscriptor.new(subscriptor_params) 
     
-    if @subscriptor.save
+    respond_to do |format|
 
-      # send subscriptor mail
-      UserNotifierMailer.send_subscribe_email(@subscriptor).deliver_now
+      if @subscriptor.save
+        # send subscriptor mail
+        UserNotifierMailer.send_subscribe_email(@subscriptor).deliver_now
 
-      redirect_to posts_path, notice: "Subscription successfully"
-    else
-      flash[:alert] = "Subscription failed. Try again"
-      render :new
+        format.html {redirect_to posts_path, notice: "Subscription successfully"}
+        format.json {render :show, status: :created}
+      else
+        format.html {render :new, notice: "Hubo un error, favor suscribirse de nuevo" }
+        format.json {render json: @subscriptor.errors, status: :unprocessable_entity }
+      end
+
     end
 
   end
   
   def show  
-
+    respond_to do |format|
+      format.html
+      format.json {render json: @subscriptor}
+    end
   end
 
   def edit
-
+    
   end
   
   def update
-    @subscriptor = Subscriptor.find(params[:id])
-    redirect_to subscriptor_path(@subscriptor)
+    respond_to do |format|
+      if @subscriptor.update(subscriptor_params)
+        format.htm {redirect_to subscriptor_path(@subscriptor)}
+        format.json {render :show, status: :ok}
+      else
+        format.html{render :edit}
+        format.json{render json: @subscriptor.errors, status: :unprocessable_entity}
+      end
+      
+    end
   end
 
   def destroy
-    @subscriptor = Subscriptor.find(params[:id])
     @subscriptor.destroy 
-    redirect_to subscriptors_path
+    
+    respond_to do |format|
+      format.html {redirect_to subscriptors_path, notice: "Subscriptor was removed successfully"}
+      format.json {head :no_content}
+    end
   end
 
   private
@@ -53,4 +81,7 @@ class SubscriptorsController < ApplicationController
      params.require(:subscriptor).permit(:name, :email)
    end
 
+   def find_subscriptor
+     @subscriptor = Subscriptor.find(params[:id])
+   end
 end
