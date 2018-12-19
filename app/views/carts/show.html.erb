@@ -1,2 +1,16 @@
-<h1>Carts#show</h1>
-<p>Find me in app/views/carts/show.html.erb</p>
+<% if @order_items.any? %>
+    <% @order_items.each do |item| %>
+        <p>
+            <%= item.product.name %> 
+        </p>
+        <p>
+            Unit price: <%= number_to_currency(item.product.price) %>
+            Quantity: <%= item.quantity %>
+            Total Price: <%= number_to_currency(item.product.price * item.quantity) %>
+        </p>
+    <% end %>    
+
+    <p>Your total: <%= number_to_currency(current_order.total) %><p/>
+<% else %>
+    <p>Your cart is empty</p>
+<% end %>
