@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'order_items/create'
+  get 'order_items/update'
+  get 'order_items/destroy'
+  get 'carts/show'
   # Index, Root or Home
   root 'home#index'
 
@@ -20,7 +24,8 @@ Rails.application.routes.draw do
 
   ##Products routes
   resources :products #a estas rutas tendrá acceso el user
-
+  resource :cart, only: [:show]
+  resources :order_items, only: [:create, :update, :destroy]
   # #   get 'posts/index', to: 'posts#index'
   # #   get 'posts/create', to: 'posts#create'
   # # # En total 8 rutas. que con resources se crean automáticamente
