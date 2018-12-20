@@ -1,7 +1,8 @@
 class HomeController < ApplicationController
 #Aquí contruiremos el CRUD
   def index
-    @hola = "Hola mundo"
+    @products = Product.all.order(created_at: :desc)
+    @order_item = current_order.order_items.new
     #render html:"<h1>Hola mundo</h1>".html_safe #Otra forma de renderizar html. 
   end
 
